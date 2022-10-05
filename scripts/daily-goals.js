@@ -3,7 +3,6 @@ checkUser();
 logout();
 
 const deleteElement = (e) => {
-
   const options = {
     method: "DELETE",
     headers: {
@@ -13,23 +12,27 @@ const deleteElement = (e) => {
     },
   };
   const id = e.target.dataset.habit;
-  fetch("https://habithon-server.herokuapp.com/goals/" + id, options)
-  .then(res => {console.log(res); location.reload();})
+  fetch("https://habithon-server.herokuapp.com/goals/" + id, options).then(
+    (res) => {
+      console.log(res);
+      location.reload();
+    }
+  );
 };
 
 const completedHabit = (e) => {
-  const number = parseInt(e.currentTarget.dataset.streak) +1
+  const number = parseInt(e.currentTarget.dataset.streak) + 1;
   const date = Date.parse(e.currentTarget.dataset.last);
   const frequency = e.currentTarget.dataset.frequency;
-  const now = Date.now()
+  const now = Date.now();
   let freqNum = 86400000;
-  if(frequency == "weekly"){
-    freqNum *= 7
+  if (frequency == "weekly") {
+    freqNum *= 7;
   } else if (frequency == "Monthly") {
-    freqNum *= 31
+    freqNum *= 31;
   }
-  console.log(frequency)
-  const streak = {streak: number}
+  console.log(frequency);
+  const streak = { streak: number };
   const options = {
     method: "PUT",
     headers: {
@@ -37,15 +40,18 @@ const completedHabit = (e) => {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
     },
-    body: JSON.stringify(streak)
+    body: JSON.stringify(streak),
   };
-  if(date + freqNum >= now) {
+  if (date + freqNum >= now) {
     location.reload();
   } else {
-    
     const id = e.target.dataset.habit;
-    fetch("https://habithon-server.herokuapp.com/goals/" + id, options)
-    .then(res => {console.log(res); location.reload()});
+    fetch("https://habithon-server.herokuapp.com/goals/" + id, options).then(
+      (res) => {
+        console.log(res);
+        location.reload();
+      }
+    );
   }
 };
 
@@ -57,13 +63,23 @@ const completedHabit = (e) => {
     const div = document.createElement("div");
     div.classList.add("goals-item");
     div.innerHTML = ` 
-        <div class="goals-image"> <img src="images/daily-goals-${habit.habit}.jpg" alt=""></div>
+        <div class="goals-image"> <img src="images/daily-goals-${
+          habit.habit
+        }.jpg" alt=""></div>
         <div class="goals-item-extra"></div>
         <div class='stats-wrapper'><h1>${habit.habit.toLowerCase()}</h1><p>Frequency: <span>${habit.frequency.toUpperCase()}</span></p></div>
-        <p><strong>STREAK: </strong><span class="streak-number">${habit.streak}</span></p>
+        <p><strong>STREAK: </strong><span class="streak-number">${
+          habit.streak
+        }</span></p>
         <div class='update-modal hidden'>
-          <button class="update-btn completed"  data-streak="${habit.streak}" data-habit="${habit.id}" data-last="${habit.last_completed}" data-frequency="${habit.frequency}">Completed</button>
-          <button class="update-btn deleteBtn" data-habit="${habit.id}">Delete</button>
+          <button class="update-btn completed"  data-streak="${
+            habit.streak
+          }" data-habit="${habit.id}" data-last="${
+      habit.last_completed
+    }" data-frequency="${habit.frequency}">Completed</button>
+          <button class="update-btn deleteBtn" data-habit="${
+            habit.id
+          }">Delete</button>
         </div>
         `;
     grid.appendChild(div);
@@ -72,15 +88,16 @@ const completedHabit = (e) => {
   for (let item of goalItems) {
     item.addEventListener("click", (e) => {
       const clickedGoal = e.currentTarget;
-      clickedGoal.querySelector(".update-modal").classList.toggle('hidden')
+      clickedGoal.querySelector(".update-modal").classList.toggle("hidden");
 
-      clickedGoal.querySelector(".deleteBtn").addEventListener('click', deleteElement)
-      clickedGoal.querySelector(".completed").addEventListener('click',completedHabit)
-
+      clickedGoal
+        .querySelector(".deleteBtn")
+        .addEventListener("click", deleteElement);
+      clickedGoal
+        .querySelector(".completed")
+        .addEventListener("click", completedHabit);
     });
   }
-
-
 })();
 
 const options = {
@@ -99,7 +116,7 @@ fetch("https://habithon-server.herokuapp.com/goals/", options)
     if (data["success"]) {
       console.log(data.habits.length);
       if (data.habits.length == 0) {
-        window.location.assign("/pages/index.html");
+        window.location.assign("/index.html");
       }
     } else {
       throw "Unable to authenticate!";

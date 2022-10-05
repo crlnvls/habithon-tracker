@@ -34,7 +34,7 @@ form.addEventListener("submit", function (e) {
     body: JSON.stringify(body),
   })
     .then((res) => res.json())
-    .then((data) => window.location.assign("/pages/daily-goals.html"))
+    .then((data) => window.location.assign("/daily-goals.html"))
     .catch((err) => console.log(err));
 });
 
