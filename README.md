@@ -3,6 +3,7 @@
 A mobile app where users can track there daily habits and set goals.
 
 - View the app on netlify at [https://habithon-tracker.netlify.app](https://habithon-tracker.netlify.app/)
+- Server side [here](https://github.com/crlnvls/habithon-api-heroku)
 
 ## Installation & Usage
 
