@@ -2,7 +2,7 @@ function checkUser() {
   const token = localStorage.getItem("token");
   console.log(token);
   if (!token) {
-    window.location.assign("/login.html");
+    window.location.assign("/index.html");
   }
 }
 
@@ -10,7 +10,7 @@ function checkInvalidUser() {
   const token = localStorage.getItem("token");
 
   if (token) {
-    window.location.assign("/index.html");
+    window.location.assign("/new-goals.html");
   }
 }
 
@@ -18,7 +18,7 @@ function logout() {
   document.querySelector(".logout").addEventListener("click", () => {
     console.log("hi");
     localStorage.removeItem("token");
-    window.location.assign("/login.html");
+    window.location.assign("/index.html");
   });
 }
 

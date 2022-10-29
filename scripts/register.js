@@ -16,7 +16,7 @@ function register(data) {
     .then((response) => {
       console.log(response);
       if (response["success"]) {
-        window.location.assign("/login.html");
+        window.location.assign("/index.html");
       } else {
         throw "Unable to authenticate!";
       }

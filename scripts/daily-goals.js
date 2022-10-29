@@ -116,7 +116,7 @@ fetch("https://habithon-server.herokuapp.com/goals/", options)
     if (data["success"]) {
       console.log(data.habits.length);
       if (data.habits.length == 0) {
-        window.location.assign("/index.html");
+        window.location.assign("/new-goals.html");
       }
     } else {
       throw "Unable to authenticate!";
